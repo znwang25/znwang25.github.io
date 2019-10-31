@@ -622,12 +622,6 @@ footer {
 
   header li, header ul li + li + li {
     width: 33%; }
-
-    section {
-      padding: 0px;
-      overflow:auto;
-      overflow-x:hidden;
-    }
  }
 
 
