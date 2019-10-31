@@ -617,11 +617,19 @@ footer {
   body {
     padding: 15px; }
 
+  footer {
+      padding: 15px; }
+
   header ul {
     width: 99%; }
 
   header li, header ul li + li + li {
     width: 33%; }
+
+  .wrapper {
+      overflow-x:hidden;
+      touch-action: none;
+    }
  }
 
 
