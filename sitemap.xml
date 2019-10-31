@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>http://znwang.me/research/</loc>
+  </url>
+  
+  <url>
+    <loc>http://znwang.me/teaching/</loc>
+  </url>
+  
+  <url>
+    <loc>http://znwang.me/categories/</loc>
+  </url>
+  
+  <url>
+    <loc>http://znwang.me/</loc>
+  </url>
+  
+  <url>
+    <loc>http://znwang.me/resources/</loc>
+  </url>
+  
+  <url>
+    <loc>http://znwang.me/tags/</loc>
+  </url>
+  
+</urlset>
