@@ -235,9 +235,14 @@
 .highlight {
   background-color: #f8f8f8; }
 
+html {
+  overflow-y: scroll;
+}
+
 body {
   background-color: #fff;
-  padding: 30px;
+  padding: 30px 0;
+  width: 100%;
   font: 14px/1.5 "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #727272;
   font-weight: 400; }
@@ -434,7 +439,8 @@ footer {
 }
 
 .navigation-wrapper {
-  width: 100%;
+  float: right;
+  width: 60%;
   padding: 0 0 2em 0;
   margin: 0 auto;
   font-family: 'PT Sans Narrow', sans-serif;
@@ -462,13 +468,17 @@ footer {
   width: 270px;
   margin-bottom: 1em;
   margin-left: 0;
+  padding: 0 0 2em 0;
   font-size: 16px;
+  font-family: 'PT Sans Narrow', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
 .top-navigation {
   display: block;
   float: right;
-  width: 60%;
+  width: 100%;
   /* margin-right: 8.333333333333334%; */
   margin-left: 0;
   margin-bottom: 1em;
@@ -497,13 +507,16 @@ footer {
 }
 
 @media print, screen and (max-width: 960px) {
-  div.wrapper {
+  body{
+    padding: 20px;
+  }
+  .wrapper {
     width: auto;
     margin: 0; }
 
   header, footer {
     float: left;
-    position: static;
+    position: fixed;
     width: 30%; }
 
   section{
@@ -529,7 +542,6 @@ footer {
   .site-name {
     display: block;
     float: left;
-    width: 30%;
     margin-bottom: 1em;
     margin-left: 0;
     font-size: 16px;
@@ -538,7 +550,8 @@ footer {
 
 @media print, screen and (max-width: 720px) {
   body {
-    word-wrap: break-word; }
+    word-wrap: break-word;
+    padding: 15px; }
 
   header, section, footer {
     float: none;
@@ -546,8 +559,12 @@ footer {
     width: auto; }
 
   header {
-    padding: 0; }
-
+    padding: 0;
+    text-align: center;
+  }
+  section {
+    padding: 10px;
+  }
   header ul, header p.view {
     position: static; }
 
@@ -563,30 +580,36 @@ footer {
   pre, code {
     word-wrap: normal; }
   .site-name {
-    display: block;
+    display: none;
     float: none;
-    width: 30%;
+    width: 100%;
     margin-bottom: 1em;
     margin-left: 0;
     font-size: 16px;
+  }
+  .navigation-wrapper {
+    width: 100%;
   }
   .top-navigation {
-    display: block;
     float: none;
-    width: auto;
-    margin-left: 0;
+    width: 100%;
+    margin:0;
+    padding:0;
     margin-bottom: 1em;
+    text-align:center;
+    list-style:none;
+  }
+  .top-navigation ul {
+    display: inline-block;
   }
   .top-navigation li {
-    display:inline-block;
+    display:inline;
     font-size: 16px;
-    margin-right: 25px;
-    list-style-type: none;
     border-bottom: 0 solid transparent;
   }
   .top-navigation li a {
-    display: block;
-    padding: 0;
+    display:inline-block;
+    padding: 10px;
   }
  }
 
@@ -600,15 +623,14 @@ footer {
   header li, header ul li + li + li {
     width: 33%; }
 
-  .site-name {
-    display: block;
-    float: none;
-    width: auto;
-    margin-bottom: 1em;
-    margin-left: 0;
-    font-size: 16px;
-  }
+    section {
+      padding: 0px;
+      overflow:auto;
+      overflow-x:hidden;
+    }
  }
+
+
 
 @media print {
   body {
