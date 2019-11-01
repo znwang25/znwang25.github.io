@@ -13,7 +13,7 @@
   <body>
       <div class="navigation-wrapper">
         <div class="site-name">
-                <a href="../../">Zenan Wang&#39;s Site</a>
+                
             </div>
         <div class="top-navigation">
             <nav role="navigation" id="site-nav" class="nav">
@@ -113,117 +113,17 @@
 <section>
     
 
-<h1 id="形近词中文模糊匹配">形近词中文模糊匹配</h1>
+<h1 id="fuzzy-matching-chinese-words">Fuzzy Matching Chinese Words</h1>
 
-<p>A simple tool to fuzzy match chinese words, particular useful for proper name matching and address matching.</p>
+<p><a href="https://github.com/znwang25/fuzzychinese">Github repo</a>  &emsp;  <a href="https://fuzzychinese.znwang.me/">Documentation</a></p>
 
-<p>一个可以模糊匹配形近字词的小工具。对于专有名词，地址的匹配尤其有用。</p>
+<p>I wrote this package while I was frustrated with matching Chinese city names from different data sources. Sometimes, the names seem to be identical but are actually representing different characters. For example, <code>汩罗市</code> and <code>汨罗市</code>. Other times, abbreviated names are used, such as <code>长阳县</code> for <code>长阳土家族自治县</code>.</p>
 
-<h2 id="安装说明">安装说明</h2>
+<p>It got me thinking, is there any way to match those words?</p>
 
-<pre><code>pip install fuzzychinese
-</code></pre>
+<p>The solution I came up with is to dive into sub-character level to perform matching. The basic idea is to first decompose words into <code>strokes</code> (or <code>radicals</code>), then calculate the tf–idf vector for those n-gram strokes. Finally, we can calculate similarity scores between words and find the closest neighbor.</p>
 
-<h2 id="使用说明">使用说明</h2>
-
-<p>首先使用想要匹配的字典对模型进行训练。</p>
-
-<p>然后用<code>FuzzyChineseMatch.transform(raw_words, n)</code> 来快速查找与<code>raw_words</code>的词最相近的前n个词。</p>
-
-<p>训练模型时有三种分析方式可以选择，笔划分析(<code>stroke</code>)，部首分析(<code>radical</code>)，和单字分析(<code>char</code>)。也可以通过调整<code>ngram_range</code>的值来提高模型性能。</p>
-
-<p>匹配完成后返回相似度分数，匹配的相近词语及其原有索引号。</p>
-
-<pre><code class="language-python">    import pandas as pd
-    from fuzzychinese import FuzzyChineseMatch
-    test_dict =  pd.Series(['长白朝鲜族自治县','长阳土家族自治县','城步苗族自治县','达尔罕茂明安联合旗','汨罗市'])
-    raw_word = pd.Series(['达茂联合旗','长阳县','汩罗市'])
-    assert('汩罗市'!='汨罗市') # They are not the same!
-
-    fcm = FuzzyChineseMatch(ngram_range=(3, 3), analyzer='stroke')
-    fcm.fit(test_dict)
-    top2_similar = fcm.transform(raw_word, n=2)
-    res = pd.concat([
-        raw_word,
-        pd.DataFrame(top2_similar, columns=['top1', 'top2']),
-        pd.DataFrame(
-            fcm.get_similarity_score(),
-            columns=['top1_score', 'top2_score']),
-        pd.DataFrame(
-            fcm.get_index(),
-            columns=['top1_index', 'top2_index'])],
-                    axis=1)
-</code></pre>
-
-<table>
-<thead>
-<tr>
-<th></th>
-<th>top1</th>
-<th>top2</th>
-<th>top1_score</th>
-<th>top2_score</th>
-<th>top1_index</th>
-<th>top2_index</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>达茂联合旗</td>
-<td>达尔罕茂明安联合旗</td>
-<td>长白朝鲜族自治县</td>
-<td>0.824751</td>
-<td>0.287237</td>
-<td>3</td>
-<td>0</td>
-</tr>
-
-<tr>
-<td>长阳县</td>
-<td>长阳土家族自治县</td>
-<td>长白朝鲜族自治县</td>
-<td>0.610285</td>
-<td>0.475000</td>
-<td>1</td>
-<td>0</td>
-</tr>
-
-<tr>
-<td>汩罗市</td>
-<td>汨罗市</td>
-<td>长白朝鲜族自治县</td>
-<td>1.000000</td>
-<td>0.152093</td>
-<td>4</td>
-<td>0</td>
-</tr>
-</tbody>
-</table>
-
-<h2 id="其他功能">其他功能</h2>
-
-<ul>
-<li><p>直接使用<code>Stroke</code>, <code>Radical</code>进行汉字分解。</p>
-
-<pre><code class="language-python">stroke = Stroke()
-radical = Radical()
-print(&quot;像&quot;, stroke.get_stroke(&quot;像&quot;))
-print(&quot;像&quot;, radical.get_radical(&quot;像&quot;))
-</code></pre>
-
-<pre><code>像 ㇒〡㇒㇇〡㇕一㇒㇁㇒㇒㇒㇏
-像 人象
-</code></pre></li>
-
-<li><p>使用<code>FuzzyChineseMatch.compare_two_columns(X, Y)</code>对每一行的两个词进行比较，获得相似度分数。</p></li>
-
-<li><p>详情请参见<a href="http://znwang.me/fuzzychinese/">说明文档</a>.</p></li>
-</ul>
-
-<h2 id="致谢">致谢</h2>
-
-<p>拆字数据来自于 <a href="https://github.com/kfcd/chaizi">漢語拆字字典</a> by <a href="http://kaifangcidian.com/">開放詞典網</a>。</p>
+<p>This package follows the style of <code>sklearn</code> package, should be very straight-forward to use.</p>
 
 <h2 id="installation">Installation</h2>
 
@@ -330,12 +230,42 @@ print(&quot;像&quot;, radical.get_radical(&quot;像&quot;))
 
 <p>Data for Chinese radicals are from <a href="https://github.com/kfcd/chaizi">漢語拆字字典</a> by <a href="http://kaifangcidian.com/">開放詞典網</a>.</p>
 
+<h2 id="中文使用说明">中文使用说明</h2>
+
+<p>中文形近词模糊匹配</p>
+
+<p>一个可以模糊匹配形近字词的小工具。对于专有名词，地址的匹配尤其有用。</p>
+
+<pre><code>pip install fuzzychinese
+</code></pre>
+
+<p>首先使用想要匹配的字典对模型进行训练。</p>
+
+<p>然后用<code>FuzzyChineseMatch.transform(raw_words, n)</code> 来快速查找与<code>raw_words</code>的词最相近的前n个词。</p>
+
+<p>训练模型时有三种分析方式可以选择，笔划分析(<code>stroke</code>)，部首分析(<code>radical</code>)，和单字分析(<code>char</code>)。也可以通过调整<code>ngram_range</code>的值来提高模型性能。</p>
+
+<p>匹配完成后返回相似度分数，匹配的相近词语及其原有索引号。</p>
+
+<h3 id="其他功能">其他功能</h3>
+
+<ul>
+<li>直接使用<code>Stroke</code>, <code>Radical</code>进行汉字分解。</li>
+<li>使用<code>FuzzyChineseMatch.compare_two_columns(X, Y)</code>对每一行的两个词进行比较，获得相似度分数。</li>
+<li>详情请参见<a href="http://znwang.me/fuzzychinese/">说明文档</a>.</li>
+</ul>
+
+<h3 id="致谢">致谢</h3>
+
+<p>拆字数据来自于 <a href="https://github.com/kfcd/chaizi">漢語拆字字典</a> by <a href="http://kaifangcidian.com/">開放詞典網</a>。</p>
+
 </section>
 <footer>
-    <p><small>Copyright © 2010-2019 Zenan Wang<br/>Last updated on Oct 31, 2019</small></p>
+    <p><small>Copyright © 2010-2019 Zenan Wang<br/>Last updated on Nov 1, 2019</small></p>
 </footer>
 </div>
 <script src="../../js/scale.fix.js"></script>
+<script src="../../js/jquery-3.3.1.min.js"></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
