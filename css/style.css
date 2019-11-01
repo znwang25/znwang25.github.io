@@ -540,6 +540,7 @@ footer {
     text-align: center;
   }
   .site-name {
+    width: 100%;
     display: block;
     float: left;
     margin-bottom: 1em;
@@ -550,6 +551,7 @@ footer {
 
 @media print, screen and (max-width: 720px) {
   body {
+    width: 90%;
     word-wrap: break-word;
     padding: 15px; }
 
@@ -569,26 +571,26 @@ footer {
     position: static; }
 
   .profile_photo{
+    display: none;
       width: 100%;
+      margin:0;
     }
-  .profile_photo img{
-    display: block;
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  pre, code {
+  pre {
     word-wrap: normal; }
+
+  code {
+    overflow-wrap: break-word;
+  }
   .site-name {
     display: none;
     float: none;
     width: 100%;
-    margin-bottom: 1em;
+    margin-bottom: 20px;
     margin-left: 0;
     font-size: 16px;
   }
   .navigation-wrapper {
-    width: 100%;
+    padding-bottom: 10px;
   }
   .top-navigation {
     float: none;
@@ -611,25 +613,24 @@ footer {
     display:inline-block;
     padding: 10px;
   }
+  section { 
+    overflow-x: hidden;
+  }
  }
 
 @media print, screen and (max-width: 480px) {
   body {
-    padding: 15px; }
-
+    width: 90%;
+    padding: 10px;
+    word-wrap: break-word;}
   footer {
-      padding: 15px; }
+      padding: 10px; }
 
   header ul {
     width: 99%; }
 
   header li, header ul li + li + li {
     width: 33%; }
-
-  .wrapper {
-      overflow-x:hidden;
-      touch-action: none;
-    }
  }
 
 
