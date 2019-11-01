@@ -610,6 +610,7 @@ footer {
   }
   .top-navigation li {
     display:inline;
+    font-size: 98%;
     border-bottom: 0 solid transparent;
   }
   .top-navigation li a {
