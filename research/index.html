@@ -210,12 +210,24 @@
     
     <div class="content">
     <p>
-        <strong>SmartStorage: Automated Storage System with Reinforcement Learning</strong><br>
+        <a href="https://drive.google.com/file/d/1lQzr6k4BORmj1DvGnjiacpRBfwHI9X8f/view" target="blank"><strong>SmartStorage: Automated Storage System with Reinforcement Learning</strong></a><br>
         
         (with Fengshi Niu)
         
         
     </p>
+        
+        <div class="expand">
+            <div class="expand-label" style="cursor: pointer;" onclick="$h = $(this);$h.next('div').slideToggle(100,function () {$h.children('i').attr('class',function () {return $h.next('div').is(':visible') ? 'fas fa-chevron-down' : 'fas fa-chevron-right';});});">
+                <i style="font-size:x-small;" class="fas fa-chevron-right"></i>
+                <span>
+                    Abstract
+                </span>
+            </div>
+            <div class="expand-content" style="display: none;">
+                This paper applies model-based deep reinforcement learning to solve a simplified storage assignment problem. First, we train an LSTM order predictor from a long historical order sequence and use it for state transformation and reward variance reduction. Second, we run an approximate value iteration until convergence. Our algorithm is specifically designed to address the tradeoff between travel-time efficiency and the repositioning costs. Our experiments evaluate this algorithm in a variety of simulated environments with a varying number of products (&lt;= 1000) and different stochastic order processes. In all cases, our algorithm significantly reduces overall storage costs compared to random assignment heuristic. The performance gap between our algorithm and the oracle tabular value iteration with access to latent order probability is shown to be small. Our experiments also show tentative evidence that our algorithm scales up linearly in training time per iteration with respect to the number of products, despite the factorial growth of the permutations.
+            </div>
+        </div>
         
     </div>
     
@@ -223,7 +235,7 @@
     
 </section>
 <footer>
-    <p><small>Copyright © 2010-2019 Zenan Wang<br/>Last updated on Nov 3, 2019</small></p>
+    <p><small>Copyright © 2010-2019 Zenan Wang<br/>Last updated on Dec 16, 2019</small></p>
 </footer>
 </div>
 <script src="../js/scale.fix.js"></script>
