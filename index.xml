@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Homepage on Zenan Wang&#39;s Site</title>
-    <link>https://znwang.me/</link>
+    <link>https://zenan-wang.com/</link>
     <description>Recent content in Homepage on Zenan Wang&#39;s Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     
-	<atom:link href="https://znwang.me/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://zenan-wang.com/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Python Package: fuzzychinese</title>
-      <link>https://znwang.me/resources/fuzzychinese/</link>
+      <link>https://zenan-wang.com/resources/fuzzychinese/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://znwang.me/resources/fuzzychinese/</guid>
+      <guid>https://zenan-wang.com/resources/fuzzychinese/</guid>
       <description>Fuzzy Matching Chinese Words Github repo &amp;emsp; Documentation
 I wrote this package while I was frustrated with matching Chinese city names from different data sources. Sometimes, the names seem to be identical but are actually representing different characters. For example, 汩罗市 and 汨罗市. Other times, abbreviated names are used, such as 长阳县 for 长阳土家族自治县.
 It got me thinking, is there any way to match those words?
@@ -24,10 +24,10 @@ The solution I came up with is to dive into sub-character level to perform match
     
     <item>
       <title>Scraping Tool for Records of Chinese Administrative Areas</title>
-      <link>https://znwang.me/resources/china_admincode/</link>
+      <link>https://zenan-wang.com/resources/china_admincode/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://znwang.me/resources/china_admincode/</guid>
+      <guid>https://zenan-wang.com/resources/china_admincode/</guid>
       <description>Scraping Records of Chinese Administrative Areas （2009-2017） Github repo
 (爬虫扒取中国乡镇区划代码历史数据 2009 - 2017)
 All chinese administrative units have a unique identifier, aka gbcode. Those identifiers are widely used in almost all chinese applications. However, each year some of the gbcode will be changed due to changes in administrative units (name change, boundary change, jurisdiction change etc.). This project aims to preserve the historical record of the gbcode by scraping gbcode for all township and above units from National Bureau of Statistics of the PRC website.</description>
