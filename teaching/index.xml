@@ -5,10 +5,6 @@
     <link>https://zenan-wang.com/teaching/</link>
     <description>Recent content in Teaching on Zenan Wang&#39;s Site</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    
-	<atom:link href="https://zenan-wang.com/teaching/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <language>en-us</language><atom:link href="https://zenan-wang.com/teaching/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

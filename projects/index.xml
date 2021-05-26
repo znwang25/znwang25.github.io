@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Homepage on Zenan Wang&#39;s Site</title>
-    <link>https://zenan-wang.com/</link>
-    <description>Recent content in Homepage on Zenan Wang&#39;s Site</description>
+    <title>Projects on Zenan Wang&#39;s Site</title>
+    <link>https://zenan-wang.com/projects/</link>
+    <description>Recent content in Projects on Zenan Wang&#39;s Site</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="https://zenan-wang.com/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language><atom:link href="https://zenan-wang.com/projects/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Python Package: fuzzychinese</title>
       <link>https://zenan-wang.com/projects/fuzzychinese/</link>
