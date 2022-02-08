@@ -48,7 +48,7 @@
       <h2> Zenan Wang, Ph.D. </h2>
     
         
-        <p>Research Scientist at JD Silicon Valley Lab</p>
+        <p>Senior Research Scientist at JD Silicon Valley Lab</p>
         
     </div>
 
@@ -115,6 +115,37 @@
 
     
     
+    
+    <div class="content">
+    <p>
+        <a href="https://arxiv.org/pdf/2202.00846.pdf" target="blank"><strong>Adaptive Experimentation with Delayed Binary Feedback</strong></a><br>
+        
+            (with Carlos Carrion, Xiliang Lin, Fuhua Ji, Yongjun Bao, and Weipeng Yan)
+        
+        
+        <br> 
+                <strong> 
+                    WWW 2022 
+                </strong>            
+            
+
+            
+        
+    </p>
+        
+        <div class="expand">
+            <div class="expand-label" style="cursor: pointer;" onclick="$h = $(this);$h.next('div').slideToggle(100,function () {$h.children('i').attr('class',function () {return $h.next('div').is(':visible') ? 'fas fa-chevron-down' : 'fas fa-chevron-right';});});">
+                <i style="font-size:x-small;" class="fas fa-chevron-right"></i>
+                <span>
+                    Abstract
+                </span>
+            </div>
+            <div class="expand-content" style="display: none;">
+                Conducting experiments with objectives that take significant delays to materialize (e.g. conversions, add-to-cart events, etc.) is challenging. Although the classical &#34;split sample testing&#34; is still valid for the delayed feedback, the experiment will take longer to complete, which also means spending more resources on worse-performing strategies due to their fixed allocation schedules. Alternatively, adaptive approaches such as &#34;multi-armed bandits&#34; are able to effectively reduce the cost of experimentation. But these methods generally cannot handle delayed objectives directly out of the box. This paper presents an adaptive experimentation solution tailored for delayed binary feedback objectives by estimating the real underlying objectives before they materialize and dynamically allocating variants based on the estimates. Experiments show that the proposed method is more efficient for delayed feedback compared to various other approaches and is robust in different settings. In addition, we describe an experimentation product powered by this algorithm. This product is currently deployed in the online experimentation platform of this http URL, a large e-commerce company and a publisher of digital ads. 
+            </div>
+        </div>
+        
+    </div>
     
     <div class="content">
     <p>
@@ -263,7 +294,7 @@
     
 </section>
 <footer>
-    <p><small>Copyright © 2010-2021 Zenan Wang, Ph.D.<br/>Last updated on Jun 2, 2021</small></p>
+    <p><small>Copyright © 2010-2022 Zenan Wang, Ph.D.<br/>Last updated on Feb 7, 2022</small></p>
 </footer>
 </div>
 <script src="../js/scale.fix.js"></script>
