@@ -13,7 +13,7 @@
       
       <guid>https://zenan-wang.com/projects/fuzzychinese/</guid>
       <description>Fuzzy Matching Chinese Words  fuzzychinese  Star 
-Documentation
+Documentation 
 I wrote this package while I was frustrated with matching Chinese city names from different data sources. Sometimes, the names seem to be identical but are actually representing different characters. For example, 汩罗市 and 汨罗市. Other times, abbreviated names are used, such as 长阳县 for 长阳土家族自治县.
 It got me thinking, is there any way to match those words?
 The solution I came up with is to dive into sub-character level to perform matching.</description>
@@ -27,7 +27,7 @@ The solution I came up with is to dive into sub-character level to perform match
       <guid>https://zenan-wang.com/projects/react_dnd_multi_selection/</guid>
       <description>React Drag and Drop with Multi-selection  react-dnd-multiple-selection  Star 
 I wrote a simple widget that implements multiple selection drag and drop behavior using the react-dnd library and react hooks.
-This was inspired and based on@melvynhills&amp;rsquo;s solution posted in this issue. But his implementation was using the legacy APIs, so I rewrote the component using new APIs as of 2020.
+This was inspired and based on@melvynhills &amp;rsquo;s solution posted in this issue . But his implementation was using the legacy APIs, so I rewrote the component using new APIs as of 2020.
 some text   </description>
     </item>
     

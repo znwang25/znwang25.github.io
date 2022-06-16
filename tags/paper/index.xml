@@ -13,8 +13,8 @@
       <pubDate>Fri, 10 Jun 2022 00:00:00 +0000</pubDate>
       
       <guid>https://zenan-wang.com/personal/banditcvr/</guid>
-      <description>How to use CVR as an objective in multi-armed bandit experiments  This article draws on our published paper in the Web Conference 2022
- Photo by Mitchel Boot on Unsplash
+      <description>How to use CVR as an objective in multi-armed bandit experiments  This article draws on our published paper  in the Web Conference 2022 
+ Photo by Mitchel Boot  on Unsplash 
 Intro Multi-armed bandit (MAB) has become an increasingly important tool for experimentation and has been widely adopted by the industry giants such as Google, Meta, Netflix, LinkedIn, etc. to conduct efficient experiments. However, widely-used MAB test designs require the objective of interest to provide instantaneous feedback in order to update the assignment probability to each variant.</description>
     </item>
     

@@ -115,10 +115,18 @@
 <section>
     <h1 id="how-to-use-cvr-as-an-objective-in-multi-armed-bandit-experiments">How to use CVR as an objective in multi-armed bandit experiments</h1>
 <blockquote>
-<p>This article draws on our published <a href="https://dl.acm.org/doi/10.1145/3485447.3512097">paper</a> in <a href="https://www2022.thewebconf.org/">the Web Conference 2022</a></p>
+<p>This article draws on our published <a href="https://dl.acm.org/doi/10.1145/3485447.3512097" target="_blank">
+    paper
+</a> in <a href="https://www2022.thewebconf.org/" target="_blank">
+    the Web Conference 2022
+</a></p>
 </blockquote>
 <p><img src="../../img/post_bandit_cvr/cover_photo.jpg" alt="cover photo">
-Photo by <a href="https://unsplash.com/@valeon?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Mitchel Boot</a> on <a href="https://unsplash.com/">Unsplash</a></p>
+Photo by <a href="https://unsplash.com/@valeon?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText" target="_blank">
+    Mitchel Boot
+</a> on <a href="https://unsplash.com/" target="_blank">
+    Unsplash
+</a></p>
 <h2 id="intro">Intro</h2>
 <p>Multi-armed bandit (MAB) has become an increasingly important tool for experimentation and has been widely adopted by the industry giants such as Google, Meta, Netflix, LinkedIn, etc. to conduct efficient experiments. However, widely-used MAB test designs require the objective of interest to provide instantaneous feedback in order to update the assignment probability to each variant. This is why most of the tutorials you can find for running MAB experiments are probably using Click-through rate (CTR) as an objective.</p>
 <p>So in this article, I want to show you how to run a multi-armed bandit experiment for objectives that take significant delays to materialize such as conversion rate (CVR).</p>
@@ -137,7 +145,9 @@ means even larger experimentation costs.</p>
 <li>
 <p>Prone to erroneous decisions if not analyzed correctly.
 The A/B/n tests are designed to be analyzed only when the targeted sample size is reached. But inexperienced and impatient experimenters are often inclined to peek at results and make decisions before the
-experiments, which could lead to erroneous conclusions. See <a href="https://www.lucidchart.com/blog/the-fatal-flaw-of-ab-tests-peeking">this blog for more discussion</a>. Running a
+experiments, which could lead to erroneous conclusions. See <a href="https://www.lucidchart.com/blog/the-fatal-flaw-of-ab-tests-peeking" target="_blank">
+    this blog for more discussion
+</a>. Running a
 longer experiment creates more opportunities
 for mistakes.</p>
 </li>
@@ -183,7 +193,9 @@ estimated CVRs from the first component. If a stopping rule is not
 met, new ads will be displayed to users according to the assignment
 probability. Then the process repeats.</p>
 <h3 id="cvr-estimation">CVR Estimation</h3>
-<p>In the first component, we use the <a href="https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm">expectation maximization</a> method to get CVR estimation for each experimental group.</p>
+<p>In the first component, we use the <a href="https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm" target="_blank">
+    expectation maximization
+</a> method to get CVR estimation for each experimental group.</p>
 <p>First, we assume the delay distribution to be exponentially distributed, parameterized by <code>$\lambda_k$</code> for each experimental group <code>$k$</code>.</p>
 <p>For each group <code>$k$</code>, collect all the clicks in group <code>$k$</code>. First compute the weight for each click <code>$i$</code>
 follows<br>
@@ -213,11 +225,15 @@ Simply speaking, the <code>$\beta_{kt}$</code> equals the number of effective cl
 exponentially distributed delays.</p>
 <p><img src="../../img/post_bandit_cvr/algorithm_write_up.png" alt="algorithm"></p>
 <h2 id="conclusion">Conclusion</h2>
-<p>There you have it. Now you can start running your multi-armed bandit experiments with the CVR metric. This article is written based on our paper <a href="https://dl.acm.org/doi/10.1145/3485447.3512097">Adaptive Experimentation with Delayed Binary Feedback</a>. If you want to assume a delay distribution other than exponential distribution or use other types of delayed feedback, you can find more discussion in the paper. The code for simulations in the paper is available in this <a href="https://github.com/jd-applied-economics/WWW22-cvr-bandit">repo</a>. The code is written in R and may help you implement the method.</p>
+<p>There you have it. Now you can start running your multi-armed bandit experiments with the CVR metric. This article is written based on our paper <a href="https://dl.acm.org/doi/10.1145/3485447.3512097" target="_blank">
+    Adaptive Experimentation with Delayed Binary Feedback
+</a>. If you want to assume a delay distribution other than exponential distribution or use other types of delayed feedback, you can find more discussion in the paper. The code for simulations in the paper is available in this <a href="https://github.com/jd-applied-economics/WWW22-cvr-bandit" target="_blank">
+    repo
+</a>. The code is written in R and may help you implement the method.</p>
 
 </section>
 <footer>
-    <p><small>Copyright © 2010-2022 Zenan Wang, Ph.D.<br/>Last updated on Jun 15, 2022</small></p>
+    <p><small>Copyright © 2010-2022 Zenan Wang, Ph.D.<br/>Last updated on Jun 16, 2022</small></p>
 </footer>
 </div>
 
