@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blogs on Zenan Wang&#39;s Site</title>
+    <link>https://zenan-wang.com/personal/</link>
+    <description>Recent content in Blogs on Zenan Wang&#39;s Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 07 Feb 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://zenan-wang.com/personal/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Statistics Review 1</title>
+      <link>https://zenan-wang.com/personal/statistics/</link>
+      <pubDate>Mon, 07 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://zenan-wang.com/personal/statistics/</guid>
+      <description>Statistics Review 1 $$a^2 + b^2 = c^2$$</description>
+    </item>
+    
+  </channel>
+</rss>

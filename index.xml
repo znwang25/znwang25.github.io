@@ -5,7 +5,8 @@
     <link>https://zenan-wang.com/</link>
     <description>Recent content in Homepage on Zenan Wang&#39;s Site</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="https://zenan-wang.com/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language>
+    <lastBuildDate>Mon, 07 Feb 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://zenan-wang.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Python Package: fuzzychinese</title>
       <link>https://zenan-wang.com/projects/fuzzychinese/</link>
@@ -29,6 +30,15 @@ The solution I came up with is to dive into sub-character level to perform match
 I wrote a simple widget that implements multiple selection drag and drop behavior using the react-dnd library and react hooks.
 This was inspired and based on@melvynhills&amp;rsquo;s solution posted in this issue. But his implementation was using the legacy APIs, so I rewrote the component using new APIs as of 2020.
 some text   </description>
+    </item>
+    
+    <item>
+      <title>Statistics Review 1</title>
+      <link>https://zenan-wang.com/personal/statistics/</link>
+      <pubDate>Mon, 07 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://zenan-wang.com/personal/statistics/</guid>
+      <description>Statistics Review 1 $$a^2 + b^2 = c^2$$</description>
     </item>
     
     <item>

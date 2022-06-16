@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Zenan Wang&#39;s Site | Scraping Tool for Records of Chinese Administrative Areas</title>
+    <title>Zenan Wang&#39;s Site | Blogs</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     
     <script async defer src="https://buttons.github.io/buttons.js"></script>
   </head>
@@ -18,15 +18,15 @@
         <div class="top-navigation">
             <nav role="navigation" id="site-nav" class="nav">
                 <ul>
-                    <li><a href="../../">Home</a></il>
+                    <li><a href="../">Home</a></il>
                         
-                        <li><a href="../../research/">Research</a></il>
+                        <li><a href="../research/">Research</a></il>
                         
-                        <li><a href="../../personal/">Blogs</a></il>
+                        <li><a href="../personal/">Blogs</a></il>
                         
-                        <li><a href="../../teaching/">Teaching</a></il>
+                        <li><a href="../teaching/">Teaching</a></il>
                         
-                        <li><a href="../../projects/">Projects</a></il>
+                        <li><a href="../projects/">Projects</a></il>
                         
                 </ul>
             </nav>
@@ -39,7 +39,7 @@
     
     <div class="profile_photo">
         
-			<img src="../../img/profile.jpg" alt="Logo" />
+			<img src="../img/profile.jpg" alt="Logo" />
         
     </div>
     
@@ -113,100 +113,26 @@
       </header>
 
 <section>
-    <h1 id="scraping-records-of-chinese-administrative-areas-2009-2017">Scraping Records of Chinese Administrative Areas （2009-2017）</h1>
-<p>
+    <h2 id="blogs">Blogs</h2>
 
-
-
-
-
-
-    
-    
-    
-    
-
-
-
-
-
-
-
-
-<a 
-class="github-button" 
-href="https://github.com/znwang25/china_admincode"
-data-icon="octicon-mark-github"
-aria-label="View znwang25/china_admincode on GitHub"
- 
-
-
->
-china_admincode
-</a>
-
-
-
-
-
-
-
-    
-    
-    
-    
-
-
-
-
-
-
-
-
-<a 
-class="github-button" 
-href="https://github.com/znwang25/china_admincode/"
-data-icon="octicon-star"
-aria-label="Star znwang25/china_admincode on GitHub"
- data-show-count="true" 
-
-
->
-Star
-</a></p>
-<p>(爬虫扒取中国乡镇区划代码历史数据 2009 - 2017)</p>
-<p>All chinese administrative units have a unique identifier, aka <em>gbcode</em>. Those identifiers are widely used in almost all chinese applications. However, each year some of the gbcode will be changed due to changes in administrative units (name change, boundary change, jurisdiction change etc.). This project aims to preserve the historical record of the gbcode by scraping gbcode for all township and above units from National Bureau of Statistics of the PRC website. The default setting is to scrape all the information from year 2009 to 2017. You can change this range in <code>stats.py</code>.</p>
-<p>The resulting output will have following variables:</p>
 <ul>
-<li>year</li>
-<li>prov_name</li>
-<li>city_name</li>
-<li>city_code</li>
-<li>county_name</li>
-<li>county_code</li>
-<li>town_name</li>
-<li>town_code</li>
+    
+    <li><a href="../personal/statistics/">Statistics Review 1</a>
+    </li>
+    
 </ul>
-<h3 id="usage">Usage</h3>
-<p>The only required package is <code>scrapy</code>. In the project folder, run following command:</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">python</span> <span class="n">crawl</span><span class="o">.</span><span class="n">py</span>
-</code></pre></div><p>Default csv output path is <code>CSV_FILE_PATH = &quot;./admin_code.csv&quot;</code>.
-You can change this in the <code>settings.py</code></p>
-<h3 id="download-scraped-data-here">Download scraped data here</h3>
-<p><a href="https://raw.githubusercontent.com/znwang25/china_admincode/master/data/admin_code_18_09.csv">Scraped in 2018</a></p>
-
 </section>
 <footer>
     <p><small>Copyright © 2010-2022 Zenan Wang, Ph.D.<br/>Last updated on Jun 10, 2022</small></p>
 </footer>
 </div>
 
-<script src="../../js/math-code.js"></script>
+<script src="../js/math-code.js"></script>
 <script defer
   src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
-<script src="../../js/scale.fix.js"></script>
-<script src="../../js/jquery-3.3.1.min.js"></script>
+<script src="../js/scale.fix.js"></script>
+<script src="../js/jquery-3.3.1.min.js"></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
