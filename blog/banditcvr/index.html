@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Zenan Wang&#39;s Site | How to use CVR as an objective in multi-armed bandit experiments</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../css/style.css">
+    
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+  </head>
+  <body>
+      <div class="navigation-wrapper">
+        <div class="site-name">
+                
+            </div>
+        <div class="top-navigation">
+            <nav role="navigation" id="site-nav" class="nav">
+                <ul>
+                    <li><a href="../../">Home</a></il>
+                        
+                        <li><a href="../../research/">Research</a></il>
+                        
+                        <li><a href="../../blog/">Blogs</a></il>
+                        
+                        <li><a href="../../teaching/">Teaching</a></il>
+                        
+                        <li><a href="../../projects/">Projects</a></il>
+                        
+                </ul>
+            </nav>
+        </div>
+    </div>
+ 
+    <div class="wrapper">
+      <header class="left_col">
+		
+    
+    <div class="profile_photo">
+        
+			<img src="../../img/profile.jpg" alt="Logo" />
+        
+    </div>
+    
+    <br>
+
+    <div class="author_bio">
+      
+      <h2> Zenan Wang, Ph.D. </h2>
+    
+        
+        <p>Senior Research Scientist at JD Silicon Valley Lab</p>
+        
+    </div>
+
+        <div class="compact-sidebar">
+		
+        <p>
+          <i class="far fa-envelope"></i>
+          <a id='email' target="_blank" style="display:none;">
+              majnat25@tznvy.pbz
+          </a>
+            <script>
+    var email = document.getElementById("email").textContent;
+    document.write("<n uers=\"znvygb:".concat(email,"\">").replace(/[a-zA-Z]/g, function(c){return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);}));
+</script>
+<script>
+    var email = document.getElementById("email").textContent;
+    var ind_at = email.indexOf("@");
+    var new_text = email.slice(0,ind_at).replace(/[a-zA-Z]/g, function(c){return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);}).concat("<span style=\"display: none;\">tsuki</span>")
+    document.write(new_text);
+    dam = '';
+        twig = '253430';
+        for (var i = 0; i < twig.length; i+=2) {
+            dam += String.fromCharCode(parseInt(twig.substr(i, 2), 16))
+        }
+        document.write(decodeURIComponent(dam));
+</script><noscript>
+    <img src="icons/at-sign.svg" class="octicons">
+</noscript><script>
+    var email = document.getElementById("email").textContent;
+    var ind_at = email.indexOf("@");
+    var new_text = email.slice(ind_at+1).replace(/[a-zA-Z]/g, function(c){return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);}).concat("<span style=\"display: none;\">eatthisspammer!</span>")
+    document.write(new_text);
+</script>
+
+        </p>
+		
+
+        
+        
+        
+        <p>
+            <i class="fab fa-github"></i>
+            <a href="https://github.com/znwang25/" target="_blank">
+                Github
+            </a>
+          </p>
+        
+        
+        <p>
+            <i class="fab fa-linkedin"></i>
+            <a href="https://www.linkedin.com/in/zenan-wang-4886b858/" target="_blank">
+                LinkedIn
+            </a>
+          </p>
+        
+        </div>
+		
+		<hr/>
+        
+      </header>
+
+<section>
+    <h1 id="how-to-use-cvr-as-an-objective-in-multi-armed-bandit-experiments">How to use CVR as an objective in multi-armed bandit experiments</h1>
+<blockquote>
+<p>This article draws on our published <a href="https://dl.acm.org/doi/10.1145/3485447.3512097" target="_blank">
+    paper
+</a> in <a href="https://www2022.thewebconf.org/" target="_blank">
+    the Web Conference 2022
+</a></p>
+</blockquote>
+<p><img src="../../img/post_bandit_cvr/cover_photo.jpg" alt="cover photo">
+Photo by <a href="https://unsplash.com/@valeon?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText" target="_blank">
+    Mitchel Boot
+</a> on <a href="https://unsplash.com/" target="_blank">
+    Unsplash
+</a></p>
+<h2 id="intro">Intro</h2>
+<p>Multi-armed bandit (MAB) has become an increasingly important tool for experimentation and has been widely adopted by the industry giants such as Google, Meta, Netflix, LinkedIn, etc. to conduct efficient experiments. However, widely-used MAB test designs require the objective of interest to provide instantaneous feedback in order to update the assignment probability to each variant. This is why most of the tutorials you can find for running MAB experiments are probably using Click-through rate (CTR) as an objective.</p>
+<p>So in this article, I want to show you how to run a multi-armed bandit experiment for objectives that take significant delays to materialize such as conversion rate (CVR).</p>
+<h2 id="why-multi-armed-bandit-experiments">Why Multi-armed Bandit Experiments?</h2>
+<p>Suppose you are running an online advertising campaign and trying to find the best graphic design that brings the highest conversion rate to your product, you will need to conduct an experiment.</p>
+<p>You can run a classical A/B/n test, assign a fixed portion of users to
+the competing designs, and then conduct an analysis after collecting enough data. However, there are two common problems that A/B/n testing is often criticized for. And those problems are more prominent when dealing with delayed metrics like CVR because it will take longer to finish the experiment.</p>
+<ol>
+<li>
+<p>Large experimentation costs.
+Because all the competing treatments in the A/B/n test are guaranteed a
+fixed portion of the sample size, even a &ldquo;bad&rdquo; treatment can be exposed to a
+significant amount of users and it could be hurtful to the user experience. A longer experiment
+means even larger experimentation costs.</p>
+</li>
+<li>
+<p>Prone to erroneous decisions if not analyzed correctly.
+The A/B/n tests are designed to be analyzed only when the targeted sample size is reached. But inexperienced and impatient experimenters are often inclined to peek at results and make decisions before the
+experiments, which could lead to erroneous conclusions. See <a href="https://www.lucidchart.com/blog/the-fatal-flaw-of-ab-tests-peeking" target="_blank">
+    this blog for more discussion
+</a>. Running a
+longer experiment creates more opportunities
+for mistakes.</p>
+</li>
+</ol>
+<p>Here comes our hero, the multi-armed bandit paradigm. In this paradigm, we view our competing ad designs as many different slot machines. Each slot machine has its own rate of success (conversion). We want to find the slot machine with the best rate and then keep pulling its arm. A MAB algorithm will provide a principled way to iteratively adjust the assignment ratio throughout the experiment until the best treatment receives the majority of the sample.</p>
+<p>MAB has the advantage of reducing the opportunity costs from the experimentation and is immune to peeking.</p>
+<h2 id="the-problem-with-computing-cvr">The Problem with Computing CVR</h2>
+<p>Now you might wonder, MAB sounds good and all, but what&rsquo;s special about the CVR?</p>
+<p>Conversion rate is a very common and important metric used in the industry. But unlike click-through rates, conversion signals are sparse and often delayed. For example, an e-commerce website user may not complete their order hours or even days after they first start browsing. And such uncertain delays will cause us trouble.</p>
+<p>In this article, we follow the standards of the online advertising industry to define CVR
+as the percentage of the clicks that lead to a conversion (a purchase for example).</p>
+<h3 id="naive-cvr">Naive CVR</h3>
+<p><code>$$CVR_{naive} = \frac{total\_conversion_{t}}{total\_click_{t}}$$</code></p>
+<p>This is what people normally use in the industry. The problem with this CVR formula is that at any time we compute its value, we are missing all the conversions that are delayed and have not been observed yet. So this naïve CVR will underestimate the real CVR.</p>
+<p>We can see this in the following example.
+<img src="../../img/post_bandit_cvr/naive_cvr_example.png" alt="naive_cvr_example"></p>
+<p>In this simple experiment, we simulate a situation where the real CVR equals 0.5, and assume all the conversions are always delayed by 1 hour after the click. Obviously, in practice, the conversion delay will not be this simple, but the same logic in this example applies.</p>
+<p>To compute naïve CVR at <code>$t_2$</code> for example, we need to add all the orange bars as the numerator and add all the grey bars as the denominator. The computed naïve CVR is represented by the red line in the graph. Clearly, it’s underestimating the real CVR.</p>
+<p>The code below creates a more generalized simulator. It generates conversions with an exponential delay distribution and keep tracks of the observability of the conversion over time. This simulator can be used to test our Bandit code later.</p>
+<script type="application/javascript" src="https://gist.github.com/znwang25/490545dbe762dcfdae5329b2e2fa120d.js?file=bandit_cvr_data_generator.py"></script>
+
+<h3 id="corrected-cvr">Corrected CVR</h3>
+<p>One way to correct the underestimation in our example above is to use only grey bars from <code>$t_0$</code> and <code>$t_1$</code> as the denominator when computing CVR at <code>$t_2$</code>. Then, the modified CVR estimation equals 0.5, which is the underlying truth.</p>
+<p>The reason this remedy can work is that, we know none of the clicks at the <code>$t_2$</code> has any chance to generate a conversion at <code>$t_2$</code> (their corresponding conversions can only be observed 1 hour later). So those clicks at <code>$t_2$</code> should not be included in the denominator. The green line in the graph is computed using this idea, and recovers the real CVR after <code>$t_0$</code>.</p>
+<p>This approach can generalized to the more complicated case where the delay is stochastic and follows a general delay distribution (whose CDF is denoted as <code>$\tau$</code>)
+<code>$$CVR_{corrected} = \frac{total\_conversion_{t}}{effective\_click_{t}}$$</code>
+<code>$$effective\_click_{t} =\sum_{s=1}^{t}N_s \tau_{t-s}$$</code>
+<code>$$\tau_{t-s} = P(D_s\leq t-s)$$</code></p>
+<p>Simply speaking, we want to reweight the clicks to compute the effective clicks, and the weight of a click is based on the probability that its conversion is observed from the click till now. The more recent clicks will receive less weight.</p>
+<p>This formula can be proved to be an unbiased estimator if the delay distribution is known.</p>
+<h3 id="challenges-in-estimating-the-delay-distribution">Challenges in Estimating the Delay Distribution</h3>
+<p>In practice, we don&rsquo;t know what the real delay distribution is. In this section, we discuss the challenges in estimating delay distribution.</p>
+<p>During the experiment, the observed delay is right-censored. It means that, if we plot the histogram of the conversion delays, we can not observe delays longer than some threshold. Like the example below,</p>
+<p><img src="../../img/post_bandit_cvr/delay_estimation_example.png" alt="delay_estimation_example"></p>
+<p>In this example, we are trying to estimate the delay distribution at <code>$t=1000$</code>, and can only observe conversion delays smaller than 1000.</p>
+<p>There is a spike in the graph when delay equals 1000. Those are the clicks that have not been converted yet.
+There are two possible outcomes for those clicks. Either they will convert in the future, meaning having a delay larger than 1000; or they will never lead to a conversion, equivalent to having an infinitely long delay. Those non-conversions are marked by the red shade in the graph.</p>
+<p>We are only interested in estimating the delay distribution for the blue sample. If the red portion can be excluded, the estimation is relatively easy to do (it&rsquo;s the standard survival analysis). Unfortunately, during an experiment, there is no way to separate those two possibilities, unless we know the real eventual CVR.</p>
+<p>But the eventual CVR is what we want to estimate to begin with. We have come full circle!</p>
+<h2 id="how-to-run-mab-with-cvr">How to Run MAB with CVR</h2>
+<p><img src="../../img/post_bandit_cvr/Bandit_CVR_overview.png" alt="Bandit_CVR_overview">
+An overview of the system we are proposing is presented above. There are two major components related to the algorithm. The first component takes the click and conversion logs as inputs and estimates
+CVRs for each treatment group in an experiment. The second
+component computes the assignment probability based on all the
+estimated CVRs from the first component. If a stopping rule is not
+met, new ads will be displayed to users according to the assignment
+probability. Then the process repeats.</p>
+<h3 id="cvr-estimation">CVR Estimation</h3>
+<p>In the first component, we use the <a href="https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm" target="_blank">
+    expectation maximization
+</a> method to get CVR estimation for each experimental group.</p>
+<p>First, we assume the delay distribution to be exponentially distributed, parameterized by <code>$\lambda_k$</code> for each experimental group <code>$k$</code>.</p>
+<p>For each group <code>$k$</code>, collect all the clicks in group <code>$k$</code>. First compute the weight for each click <code>$i$</code>
+follows<br>
+<code>$$w^{(l)}_{kit}=\begin{cases} 1, &amp; \text{if } y_{kit}=1\\ \frac{\widehat{\theta_{kt}^*}^{(l-1)}e^{-\widehat{\lambda_{kt}^*}^{(l-1)}e_{kit}}}{1-\widehat{\theta_{kt}^*}^{(l-1)} + \widehat{\theta_{kt}^*}^{(l-1)}e^{-\widehat{\lambda_{kt}^*}^{(l-1)}e_{kit}}}, &amp; \text{if } y_{kit}= 0 \end{cases}\label{eqn:w_actual_use} $$</code>
+then updates the estimates
+<code>$$\begin{align} &amp;\widehat{\lambda_{kt}^*}^{(l)}=\frac{N_{kt}^{convert}}{\sum_{i} w_{kit}^{(l)}e_{kit}}\label{eqn:lambda_actual_use}\\ &amp;\widehat{\theta_{kt}^*}^{(l)}=\frac{N_{kt}^{convert}}{\sum_{s=1}^{t}n_{ks}^{click}(1-e^{-\widehat{\lambda_{kt}^*}^{(l)}(t-s)})}\label{eqn:theta_actual_use} \end{align}$$</code>
+where</p>
+<ol>
+<li><code>$y_{kit}$</code> indicates whether in group <code>$k$</code> click <code>$i$</code>&rsquo;s conversion has already
+occurred at time <code>$t$</code>,</li>
+<li><code>$e_{kit}$</code> is the elapsed time since the click <code>$i$</code> till time <code>$t$</code> in group <code>$k$</code> if <code>$y_{kit}=0$</code>,
+and the elapsed time since the click till conversion if <code>$y_{kit}=1$</code>,</li>
+<li><code>$\widehat{\theta_{kt}^*}^{(l)}$</code> and <code>$\widehat{\lambda_{kt}^*}^{(l)}$</code> respectively represents the estimated CVR and delay parameter in group <code>$k$</code> at time <code>$t$</code> in the <code>$(l)$</code>th cycle,</li>
+<li><code>$N_{kt}^{convert}$</code> is the cumulative conversion in group <code>$k$</code> until time <code>$t$</code>,</li>
+<li>and <code>$n_{ks}^{click}$</code> is the number of clicks in group <code>$k$</code> at the time step <code>$s$</code>.</li>
+</ol>
+<p>At each time step <code>$t$</code>, we iterate the above defined E-M computations
+for a few cycles to make sure the resulted estimates are stable. Let <code>$L$</code> represent the total number cycles. Then the final estimates of the each time step, <code>$\widehat{\theta_{t-1}^*}^{(L)}$</code> and <code>$\widehat{\lambda_{t-1}^*}^{(L)}$</code> are saved and used as the priors for the next
+time step, i.e. <code>$\widehat{\theta_t^*}^{(0)} = \widehat{\theta_{t-1}^*}^{(L)}$</code> and <code>$\widehat{\lambda_t^*}^{(0)} = \widehat{\lambda_{t-1}^*}^{(L)}$</code>.</p>
+<p>The code below provides one example implementation of the process. Each Arm class corresponds to a group described above, and is responsible for getting the relevant log data and get the estimate for <code>$\widehat{\lambda_{kt}^*}^{(L)}$</code> and <code>$\widehat{\theta_{kt}^*}^{(L)}$</code>.</p>
+<script type="application/javascript" src="https://gist.github.com/znwang25/490545dbe762dcfdae5329b2e2fa120d.js?file=bandit_cvr_arm.py"></script>
+
+<h3 id="thompson-sampling">Thompson Sampling</h3>
+<p>Once we get the estimated CVR for each group, we can use Thompson Sampling to compute the assignment probability.</p>
+<p>In order to use Thompson Sampling, we need to know the distribution of estimated CVR. Since it&rsquo;s non-trivial to get that from the EM procedure, we take a heuristic approach to assume the CVR of each group <code>$k$</code> at the time <code>$t$</code> follows a Beta distribution, <code>$Beta(\alpha_{kt},\beta_{kt})$</code>. The parameters are updated following:</p>
+<p><code>$$\begin{align} &amp;\alpha_{kt}=1+N_{kt}^{convert}\\ &amp;\beta_{kt}=max(1-N_{kt}^{convert}+\frac{N_{kt}^{convert}}{\theta_{kt}^*},1) \end{align}$$</code>
+Simply speaking, the <code>$\beta_{kt}$</code> equals the number of effective clicks + 1.</p>
+<p>The assignment probability of a group is the posterior probability that the group offers the highest expected CVR. We compute these values using Monte Carlo simulations.</p>
+<p>The code for <code>$\alpha_{kt}$</code> and <code>$\beta_{kt}$</code> updating and Beta sampling are embedded in the Arm class above. By invoking the <code>draw_beta_sample</code> method of each arm, we can compute assignment probability as follows.</p>
+<script type="application/javascript" src="https://gist.github.com/znwang25/490545dbe762dcfdae5329b2e2fa120d.js?file=bandit_cvr_thompson_sampling.py"></script>
+
+<p>The following figure summarizes the entire procedure of the method for
+exponentially distributed delays.</p>
+<p><img src="../../img/post_bandit_cvr/algorithm_write_up.png" alt="algorithm"></p>
+<h2 id="conclusion">Conclusion</h2>
+<p>There you have it. Now you can start running your multi-armed bandit experiments with the CVR metric. This article is written based on our paper <a href="https://dl.acm.org/doi/10.1145/3485447.3512097" target="_blank">
+    Adaptive Experimentation with Delayed Binary Feedback
+</a>. If you want to assume a delay distribution other than exponential distribution or use other types of delayed feedback, you can find more discussion in the paper. For the complete code shown in this article, you can find them <a href="https://gist.github.com/znwang25/490545dbe762dcfdae5329b2e2fa120d#file-everything_in_a_file-py" target="_blank">
+    HERE
+</a>.</p>
+
+</section>
+<footer>
+    <p><small>Copyright © 2010-2022 Zenan Wang, Ph.D.<br/>Last updated on Jun 23, 2022</small></p>
+</footer>
+</div>
+
+<script src="../../js/math-code.js"></script>
+<script defer
+  src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script src="../../js/scale.fix.js"></script>
+<script src="../../js/jquery-3.3.1.min.js"></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-139382545-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</body>
+</html>
+

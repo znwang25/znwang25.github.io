@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Paper on Zenan Wang&#39;s Site</title>
-    <link>https://zenan-wang.com/tags/paper/</link>
-    <description>Recent content in Paper on Zenan Wang&#39;s Site</description>
+    <title>Blogs on Zenan Wang&#39;s Site</title>
+    <link>https://zenan-wang.com/blog/</link>
+    <description>Recent content in Blogs on Zenan Wang&#39;s Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 10 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://zenan-wang.com/tags/paper/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 10 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://zenan-wang.com/blog/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>How to use CVR as an objective in multi-armed bandit experiments</title>
       <link>https://zenan-wang.com/blog/banditcvr/</link>
